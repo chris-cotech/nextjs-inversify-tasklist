@@ -6,8 +6,8 @@ export type Task = {
 };
 
 export interface TaskServiceInterface {
-  addTask(task: Task): void;
   getTasks(): Task[];
+  addTask(task: Task): void;
   toggleChecked(index: number): void;
 }
 
@@ -17,13 +17,14 @@ export class TaskService implements TaskServiceInterface {
 
   constructor() {
     this.tasks = [
-      { description: "Task 1", completed: false },
-      { description: "Task 2", completed: true },
+      { description: "Preloaded task 1", completed: false },
+      { description: "Preloaded task 2", completed: true },
     ];
   }
 
   addTask(task: Task): void {
     this.tasks = [...this.tasks, task];
+    // TODO: Add socket.io emit
   }
 
   getTasks(): Task[] {
@@ -31,10 +32,9 @@ export class TaskService implements TaskServiceInterface {
   }
 
   toggleChecked(index: number): void {
-    console.log("toggleChecked", index);
-    console.log("found task", this.tasks[index]);
-
-    this.tasks[index].completed = !this.tasks[index].completed;
-    console.log("tasks", this.tasks);
+    if (this.tasks[index]) {
+      this.tasks[index].completed = !this.tasks[index].completed;
+      // TODO: Add socket.io emit
+    }
   }
 }
