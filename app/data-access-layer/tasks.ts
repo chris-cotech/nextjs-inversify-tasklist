@@ -1,6 +1,6 @@
 "use server";
 
-import { Task, TaskService } from "@/app/services/task-service";
+import { Task, TaskService } from "../services/task-service";
 import { container } from "../inversify/container";
 import { TYPES } from "../inversify/types";
 

@@ -1,6 +1,6 @@
 import { Container } from "inversify";
 import { TYPES } from "./types";
-import { TaskServiceInterface, TaskService } from "@/app/services/task-service";
+import { TaskServiceInterface, TaskService } from "../services/task-service";
 
 const container = new Container();
 container
