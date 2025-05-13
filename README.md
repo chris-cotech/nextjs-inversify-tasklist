@@ -1,36 +1,67 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Task Management Application
+
+This is a task management application built with [Next.js](https://nextjs.org), utilizing Inversion of Control (IoC) for dependency management and Jest for testing. The application allows users to manage tasks, including adding new tasks and toggling their completion status.
+
+## Features
+
+- **Task Management**: Add, view, and toggle the completion status of tasks.
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
+
+- Node.js and npm installed on your machine. `nvm use 20.10.9`
+
+### Installation
+
+1. Clone the repository:
+
+   ```bash
+   git clone https://github.com/your-username/task-management-app.git
+   cd task-management-app
+   ```
+
+2. Install dependencies:
+
+   ```bash
+   npm install
+   ```
+
+### Running the Development Server
+
+Start the development server:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the application (provided that is the port the dev server starts on for you).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## How It Works
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### Application Structure
 
-## Learn More
+- **Frontend**: Built with Next.js, tailwind and shadcn components.
+- **Backend**: Uses Next.js Server Component routes to handle task operations, such as fetching and updating tasks. Leverages IoC singleton to persist tasks in memory for as long as the server is running. Thus you can refresh the page and see your tasks created previously.
+- **IoC Container**: Manages dependencies using InversifyJS, allowing for easy swapping and testing of components.
 
-To learn more about Next.js, take a look at the following resources:
+### Inversion of Control (IoC)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+The application uses IoC to manage dependencies, which provides several benefits:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- **Modularity**: Components are loosely coupled, making it easy to modify or replace them.
+- **Testability**: Dependencies can be easily mocked, allowing for comprehensive testing. Using interfaces you can have and test multiple instances of a service.
+- **Maintainability**: Clear separation of concerns makes the codebase easier to maintain and extend.
+- **Dependency Injection**: Using DI you can alter the request pipeline to use transient and singleton practices across your utilities (e.g. Auth0, Prisma, etc.) and data access layer (e.g. Fetch tasks, Create task, etc.). For 100% usage you would need to integrate with NextJS middleware.
 
-## Deploy on Vercel
+### Testing
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+The application uses Jest for testing the service and Data Access Layer:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- **Integration Tests**: Verify that different parts of the application work together as expected.
+
+To run the tests:
+
+```bash
+npm run test
+```
